@@ -2,7 +2,7 @@
 
 A simple Flutter application that visualizes various sorting algorithms in action.
 
-[Flutter Sort Visualizer](/flutter_sort_visualizer.gif)
+![Flutter Sort Visualizer](/flutter_sort_visualizer.gif)
 
 ## Getting Started
 
