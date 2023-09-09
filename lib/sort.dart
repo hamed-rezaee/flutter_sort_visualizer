@@ -9,7 +9,7 @@ enum SortType {
 }
 
 class Sort {
-  Sort([this.delay = const Duration(milliseconds: 5)]);
+  Sort([this.delay = const Duration(milliseconds: 1)]);
 
   final Duration delay;
 
@@ -20,15 +20,15 @@ class Sort {
   Future<List<int>> sort(List<int> list, SortType type) async {
     switch (type) {
       case SortType.bubble:
-        return await bubbleSort(list);
+        return bubbleSort(list);
       case SortType.heap:
-        return await heapSort(list);
+        return heapSort(list);
       case SortType.shell:
-        return await shellSort(list);
+        return shellSort(list);
       case SortType.quick:
-        return await quickSort(list, 0, list.length - 1);
+        return quickSort(list, 0, list.length - 1);
       case SortType.merge:
-        return await mergeSort(list, 0, list.length - 1);
+        return mergeSort(list, 0, list.length - 1);
     }
   }
 
@@ -36,14 +36,14 @@ class Sort {
     for (int i = 0; i < list.length; i++) {
       for (int j = 0; j < list.length - i - 1; j++) {
         if (list[j] > list[j + 1]) {
-          int temp = list[j];
+          final int temp = list[j];
 
           list[j] = list[j + 1];
           list[j + 1] = temp;
         }
 
         _controller.add(list);
-        await Future.delayed(delay);
+        await Future<void>.delayed(delay);
       }
     }
 
@@ -56,9 +56,9 @@ class Sort {
     }
 
     for (int i = list.length - 1; i >= 0; i--) {
-      int temp = list[0];
+      final int temp = list.first;
 
-      list[0] = list[i];
+      list.first = list[i];
       list[i] = temp;
 
       await _heapify(list, i, 0);
@@ -69,8 +69,8 @@ class Sort {
 
   Future<void> _heapify(List<int> list, int n, int i) async {
     int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+    final int left = 2 * i + 1;
+    final int right = 2 * i + 2;
 
     if (left < n && list[left] > list[largest]) {
       largest = left;
@@ -81,7 +81,7 @@ class Sort {
     }
 
     if (largest != i) {
-      int temp = list[i];
+      final int temp = list[i];
 
       list[i] = list[largest];
       list[largest] = temp;
@@ -89,14 +89,14 @@ class Sort {
       await _heapify(list, n, largest);
 
       _controller.add(list);
-      await Future.delayed(delay);
+      await Future<void>.delayed(delay);
     }
   }
 
   Future<List<int>> shellSort(List<int> list) async {
     for (int gap = list.length ~/ 2; gap > 0; gap ~/= 2) {
       for (int i = gap; i < list.length; i++) {
-        int temp = list[i];
+        final int temp = list[i];
         int j;
 
         for (j = i; j >= gap && list[j - gap] > temp; j -= gap) {
@@ -106,7 +106,7 @@ class Sort {
         list[j] = temp;
 
         _controller.add(list);
-        await Future.delayed(delay);
+        await Future<void>.delayed(delay);
       }
     }
 
@@ -115,7 +115,7 @@ class Sort {
 
   Future<List<int>> quickSort(List<int> list, int low, int high) async {
     if (low < high) {
-      int pi = await _partition(list, low, high);
+      final int pi = await _partition(list, low, high);
 
       await quickSort(list, low, pi - 1);
       await quickSort(list, pi + 1, high);
@@ -125,24 +125,24 @@ class Sort {
   }
 
   Future<int> _partition(List<int> list, int low, int high) async {
-    int pivot = list[high];
+    final int pivot = list[high];
     int i = low - 1;
 
     for (int j = low; j < high; j++) {
       if (list[j] < pivot) {
         i++;
 
-        int temp = list[i];
+        final int temp = list[i];
 
         list[i] = list[j];
         list[j] = temp;
 
         _controller.add(list);
-        await Future.delayed(delay);
+        await Future<void>.delayed(delay);
       }
     }
 
-    int temp = list[i + 1];
+    final int temp = list[i + 1];
 
     list[i + 1] = list[high];
     list[high] = temp;
@@ -152,7 +152,7 @@ class Sort {
 
   Future<List<int>> mergeSort(List<int> list, int low, int high) async {
     if (low < high) {
-      int mid = (low + high) ~/ 2;
+      final int mid = (low + high) ~/ 2;
 
       await mergeSort(list, low, mid);
       await mergeSort(list, mid + 1, high);
@@ -164,11 +164,11 @@ class Sort {
   }
 
   Future<void> _merge(List<int> list, int low, int mid, int high) async {
-    int n1 = mid - low + 1;
-    int n2 = high - mid;
+    final int n1 = mid - low + 1;
+    final int n2 = high - mid;
 
-    List<int> left = List.filled(n1, 0);
-    List<int> right = List.filled(n2, 0);
+    final List<int> left = List<int>.filled(n1, 0);
+    final List<int> right = List<int>.filled(n2, 0);
 
     for (int i = 0; i < n1; i++) {
       left[i] = list[low + i];
@@ -194,7 +194,7 @@ class Sort {
       k++;
 
       _controller.add(list);
-      await Future.delayed(delay);
+      await Future<void>.delayed(delay);
     }
 
     while (i < n1) {
@@ -203,7 +203,7 @@ class Sort {
       k++;
 
       _controller.add(list);
-      await Future.delayed(delay);
+      await Future<void>.delayed(delay);
     }
 
     while (j < n2) {
@@ -212,7 +212,7 @@ class Sort {
       k++;
 
       _controller.add(list);
-      await Future.delayed(delay);
+      await Future<void>.delayed(delay);
     }
   }
 
