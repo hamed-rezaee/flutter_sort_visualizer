@@ -4,9 +4,9 @@ A simple Flutter application that visualizes various sorting algorithms in actio
 
 ![Flutter Sort Visualizer](/flutter_sort_visualizer.gif)
 
-## Getting Started
+### Getting Started
 
-1. Clone the repository:
+1.  Clone the repository:
 
 ```dartshell
    git clone https://github.com/hamed-deriv/flutter_sort_visualizer.git
@@ -30,11 +30,11 @@ A simple Flutter application that visualizes various sorting algorithms in actio
    flutter run
 ```
 
-## Usage
+### Usage
 
 Launch the app, and you'll see a visual representation of various sorting algorithms in action. The algorithms are displayed in a grid, each with its name and a visual representation of the sorting process.
 
-## Algorithms
+### Algorithms
 
 This project includes the following sorting algorithms:
 
@@ -46,10 +46,10 @@ This project includes the following sorting algorithms:
 
 You can explore the code to see how each algorithm is implemented and integrated into the visualizer.
 
-## Contributing
+### Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
+### License
 
 This project is licensed under the [MIT License](/LICENSE).
