@@ -41,10 +41,10 @@ class Sort {
           list[j] = list[j + 1];
           list[j + 1] = temp;
         }
-
-        _controller.add(list);
-        await Future<void>.delayed(delay);
       }
+
+      _controller.add(list);
+      await Future<void>.delayed(delay * list.length ~/ 20);
     }
 
     return list;

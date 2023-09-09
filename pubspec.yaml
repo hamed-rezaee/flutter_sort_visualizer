@@ -1,10 +1,11 @@
 name: flutter_sort_visualizer
-description: A new Flutter project.
-publish_to: 'none'
+description: A simple Flutter application that visualizes various sorting algorithms in action.
+
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.6 <4.0.0'
+  sdk: ">=3.0.6 <4.0.0"
 
 dependencies:
   flutter:

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_sort_visualizer/sort.dart';
 import 'package:flutter_sort_visualizer/visualizer_painter.dart';
@@ -32,17 +30,19 @@ class MainApp extends StatelessWidget {
                       stream:
                           (Sort()..sort(List<int>.from(baseData), type)).stream,
                       initialData: baseData,
-                      builder: (BuildContext context,
-                              AsyncSnapshot<List<int>> snapshot) =>
+                      builder: (
+                        BuildContext context,
+                        AsyncSnapshot<List<int>> snapshot,
+                      ) =>
                           Stack(
                         children: <Widget>[
-                          Text(
-                            '${type.name} sort',
-                            style: const TextStyle(color: Colors.white),
-                          ),
                           CustomPaint(
                             size: size,
                             painter: VisualizerPainter(snapshot.data!),
+                          ),
+                          Text(
+                            '${type.name} sort ${type == SortType.bubble ? '(speedup)' : ''}',
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ],
                       ),
