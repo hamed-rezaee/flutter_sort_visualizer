@@ -12,7 +12,7 @@ class VisualizerPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..strokeWidth = 3
+      ..strokeWidth = 2
       ..color = Colors.orange
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill;
@@ -20,7 +20,7 @@ class VisualizerPainter extends CustomPainter {
     final int minValue = data.reduce(min);
     final int maxValue = data.reduce(max);
 
-    final double step = 2 * pi / data.length;
+    final double step = 24 * pi / data.length;
 
     final List<Offset> points = <Offset>[];
 
