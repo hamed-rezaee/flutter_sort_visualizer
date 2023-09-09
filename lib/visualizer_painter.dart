@@ -12,34 +12,51 @@ class VisualizerPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..strokeWidth = 2
-      ..color = Colors.orange
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill;
+
+    canvas.translate(size.width / 2, size.height / 2);
+
+    final List<PointData> points = _converPolarToCartesian(size);
+
+    for (final PointData point in points) {
+      paint.color = point.color;
+      canvas.drawCircle(point.offset, 1, paint..color = point.color);
+    }
+  }
+
+  List<PointData> _converPolarToCartesian(Size size) {
+    final List<PointData> points = <PointData>[];
 
     final int minValue = data.reduce(min);
     final int maxValue = data.reduce(max);
 
     final double step = 24 * pi / data.length;
 
-    final List<Offset> points = <Offset>[];
-
     for (int i = 0; i < data.length - 1; i++) {
-      final double r = _normalize(data[i], minValue, maxValue);
+      final double radius = _normalize(data[i], minValue, maxValue);
 
-      final double x = cos(i * step) * r * size.width / 2;
-      final double y = sin(i * step) * r * size.height / 2;
+      final double x = cos(i * step) * radius * size.width / 2;
+      final double y = sin(i * step) * radius * size.height / 2;
 
-      points.add(Offset(x, y));
+      points.add(PointData(Offset(x, y), _getHsvColor(radius)));
     }
 
-    canvas
-      ..translate(size.width / 2, size.height / 2)
-      ..drawPoints(pointMode, points, paint);
+    return points;
   }
 
-  double _normalize(int value, int min, int max) => (value - min) / (max - min);
+  double _normalize(int value, int min, int max) => value / (max - min);
+
+  Color _getHsvColor(double value) =>
+      HSVColor.fromAHSV(1, 360 - value * 360, 1, 1).toColor();
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+class PointData {
+  PointData(this.offset, this.color);
+
+  final Offset offset;
+  final Color color;
 }
