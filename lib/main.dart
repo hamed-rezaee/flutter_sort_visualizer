@@ -9,7 +9,7 @@ void main() => runApp(MainApp());
 class MainApp extends StatelessWidget {
   MainApp({super.key});
 
-  final List<int> baseData = List<int>.generate(1500, (int index) => index)
+  final List<int> baseData = List<int>.generate(500, (int index) => index)
     ..shuffle();
 
   @override

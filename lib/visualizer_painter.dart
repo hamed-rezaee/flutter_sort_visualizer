@@ -9,19 +9,18 @@ class VisualizerPainter extends CustomPainter {
   final List<int> data;
   final PointMode pointMode;
 
+  final Paint painter = Paint()
+    ..strokeCap = StrokeCap.round
+    ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 2);
+
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.fill;
-
     canvas.translate(size.width / 2, size.height / 2);
 
     final List<PointData> points = _converPolarToCartesian(size);
 
     for (final PointData point in points) {
-      paint.color = point.color;
-      canvas.drawCircle(point.offset, 1, paint..color = point.color);
+      canvas.drawCircle(point.offset, 1, painter..color = point.color);
     }
   }
 

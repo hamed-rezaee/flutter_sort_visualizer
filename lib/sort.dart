@@ -44,7 +44,7 @@ class Sort {
       }
 
       _controller.add(list);
-      await Future<void>.delayed(delay * list.length ~/ 50);
+      await Future<void>.delayed(delay * 30);
     }
 
     return list;
